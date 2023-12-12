@@ -1,0 +1,83 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col">
+            <div class="card border-dark">
+                <div class="card-header text-center">
+                    <label class="col col-form-label fw-bold"> LISTA DE EQUIPOS RECOMENDADOS </label>
+                </div>
+
+                <div class="card-body">
+                    {% if listado %}
+
+                    {% for dato in listado %}
+
+                    <div class="card-header border">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Servicio</span>
+                                        <input type="text" value="{{dato.servicio.nombre}}" class="form-control"
+                                            readonly>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Tipo de Equipo</span>
+                                        <input type="text" id="tipo" name="tipo" value="{{dato.tipo.nombre}}"
+                                            class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body border-dark">
+                        <table class="table table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th>COD SAP</th>
+                                    <th>Serie</th>
+                                    <th>Descripcion</th>
+                                    <th>Cantidad</th>
+                                </tr>
+                            </thead>
+
+                            {% for detalle in detalles %}
+                            {% if detalle.recomendacion == dato %}
+
+                            <tbody>
+                                <td>{{ detalle.equipo.cod_sap }}</td>
+                                <td>{{ detalle.equipo.serie }}</td>
+                                <td>{{ detalle.equipo.descripcion }}</td>
+                                <td>{{ detalle.cantidad_recomendada }}</td>
+                            </tbody>
+
+                            {% endif %}
+
+                            {% endfor %}
+                        </table>
+                    </div>
+
+                    {% endfor %}
+
+                    {% else %}
+
+                    <p class="text-center">No existe registro de recomendaciones realizadas actualmente.</p>
+
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

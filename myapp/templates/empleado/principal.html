@@ -1,0 +1,71 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+        <div class="col-auto">
+            <div class="card border-dark" style="width: 30rem;">
+                <form method="post" action="/equipos_recomendados/">
+
+                    {% csrf_token %}
+
+                    <div class="card-body">
+                        <div class="container text-center">
+                            <label class="py-3 fw-bold">SERVICIO SOLICITADO</label>
+
+                            <select name="servicio_id" id="servicio_id" class="form-select text-center" required>
+
+                                {% if servicios %}
+
+                                <option disabled selected> ------------------ </option>
+
+                                {% for servicio in servicios %}
+                                <option value="{{servicio.id}}"> {{servicio.nombre}} </option>
+                                {% endfor %}
+
+                                {% else %}
+
+                                <option> No hay servicios disponibles </option>
+
+                                {% endif %}
+                            </select>
+                        </div>
+
+                        <div class="container text-center py-5">
+                            <label class="py-3 fw-bold">TIPO DE EQUIPO</label>
+
+                            <div class="row">
+                                {% if tipos %}
+
+                                {% for tipo in tipos %}
+
+                                <div class="col py-2">
+                                    <input type="radio" id="tipo_id" name="tipo_id" value="{{tipo.id}}" required>
+                                    <label for="tipo_id">{{tipo.nombre}}</label>
+                                    <img src="{{tipo.imagen.url}}" style="height: 100px;" class="rounded">
+                                </div>
+
+                                {% endfor %}
+
+                                {% else %}
+
+                                <label> No hay tipos de equipos disponibles </label>
+
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="card-footer text-center py-3">
+                            <button type="submit" class="btn btn-success">ACEPTAR</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

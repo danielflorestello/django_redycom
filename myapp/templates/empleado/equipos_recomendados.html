@@ -1,0 +1,72 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-sm-7">
+            <div class="card border-dark">
+                <div class="card-header text-center">
+                    <label class="col col-form-label fw-bold"> EQUIPOS RECOMENDADOS </label>
+                </div>
+
+                <div class="card-body">
+                    <form method="post" action="{% url 'agregarRecomendacion' %}">
+
+                        {% csrf_token %}
+
+                        <div class="input-group mb-3">
+                            <input type="hidden" id="servicio_id" name="servicio_id" value="{{servicio.id}}">
+                            <span class="input-group-text">Servicio</span>
+                            <input type="text" value="{{servicio.nombre}}" class="form-control" readonly>
+                        </div>
+
+
+                        <div class="input-group mb-3">
+                            <input type="hidden" id="tipo_id" name="tipo_id" value="{{tipo.id}}">
+                            <span class="input-group-text">Tipo de Equipo</span>
+                            <input type="text" id="tipo" name="tipo" value="{{tipo.nombre}}" class="form-control"
+                                readonly>
+                        </div>
+
+                        <table class="table table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th>COD SAP</th>
+                                    <th>DESCRIPCION</th>
+                                    <th>SERIE</th>
+                                    <th>CANTIDAD</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for dato in lista %}
+
+                                <input type="hidden" name="cantidad" id="cantidad"
+                                    value="{{dato.cantidad_recomendada}}">
+                                <input type="hidden" name="equipo_id" id="equipo_id" value="{{dato.detalle.equipo.id}}">
+
+                                <tr>
+                                    <td>{{dato.detalle.equipo.cod_sap}}</td>
+                                    <td>{{dato.detalle.equipo.descripcion}}</td>
+                                    <td>{{dato.detalle.equipo.serie}}</td>
+                                    <td>{{dato.cantidad_recomendada}}</td>
+                                </tr>
+
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                        <div class="card-footer text-center">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

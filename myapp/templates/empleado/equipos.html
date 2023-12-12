@@ -1,0 +1,52 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="card border-dark">
+            <div class="card-header text-center fw-bold">LISTA DE EQUIPOS</div>
+
+            <div class="card-body">
+                <button id="agregarEquipos" class="btn btn-outline-success">Agregar</button>
+
+                {% if equipos %}
+
+                <table class="table table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th>CODIGO SAP</th>
+                            <th>SERIE</th>
+                            <th>DESCRIPCION</th>
+                            <th>CANTIDAD</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for equipo in equipos %}
+
+                        <tr>
+                            <td>{{equipo.cod_sap}}</td>
+                            <td>{{equipo.serie}}</td>
+                            <td>{{equipo.descripcion}}</td>
+                            <td>{{equipo.cantidad}}</td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+
+                {% else %}
+
+                <p class="text-center">No hay datos registrados todavía</p>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

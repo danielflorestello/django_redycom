@@ -1,0 +1,50 @@
+{% extends 'layouts/base.html'%}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="row-fluid justify-content-center">
+        <div class="card border-dark">
+            <div class="card-header text-center fw-bold">LISTA DE TIPOS DE EQUIPOS</div>
+
+            <div class="card-body">
+                <button id="agregarTipo" class="btn btn-outline-success">Agregar</button>
+
+                {% if tipos %}
+                
+                <table class="table table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Imagen</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for tipo in tipos %}
+
+                        <tr class="align-middle">
+                            <td>{{tipo.id}}</td>
+                            <td>{{tipo.nombre}}</td>
+
+                            <td>
+                                <img src="{{tipo.imagen.url}}" style="height: 100px;">
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {% else %}
+
+                <p class="text-center">No hay datos registrados todavía</p>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
