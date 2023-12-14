@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-import dj_database_url
 import os
 from pathlib import Path
 
@@ -82,11 +81,14 @@ WSGI_APPLICATION = 'djangoproject.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        # Feel free to alter this value to suit your needs.
-        default='postgresql://postgres:postgres@localhost/postgres',
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'b5mrjyzwyuqvmfgtlj5k',
+        'USER': 'uth6xyqcc8jievcl1zj3',
+        'PASSWORD': 'Er6hsKxjFfuALncJQ45yKs5nqcKHVm',
+        'HOST': 'b5mrjyzwyuqvmfgtlj5k-postgresql.services.clever-cloud.com',
+        'PORT': '50013'
+    }
 }
 
 
