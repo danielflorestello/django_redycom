@@ -10,7 +10,7 @@ class Servicio(models.Model):
 
 class Tipo(models.Model):
     nombre = models.CharField(max_length=50)
-    imagen = models.ImageField(upload_to='imagenes/')
+    imagen = models.ImageField(upload_to='images/')
 
     def __str__(self):
         return self.nombre
