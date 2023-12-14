@@ -17,6 +17,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
+                            <th></th>
                         </tr>
                     </thead>
 
@@ -26,6 +27,16 @@
                         <tr class="align-middle">
                             <td>{{servicio.id}}</td>
                             <td>{{servicio.nombre}}</td>
+
+                            <td>
+                                <a class="btn btn-outline-warning"
+                                    href="{% url 'editarServicios' servicio.id %}">Modificar</a>
+
+                                <button id="eliminarServicio" data-servicio-id="{{ servicio.id }}"
+                                    class="btn btn-outline-danger">
+                                    <i class="bi bi-trash"></i> Eliminar
+                                </button>
+                            </td>
                         </tr>
 
                         {% endfor %}
