@@ -381,10 +381,9 @@ def editarTipos(request, tipo_id):
 
                 if tipos.imagen:
                     os.remove(tipos.imagen.path)
-
-                tipos.imagen = imagen
-
+                    
             tipos.nombre = nombre
+            tipos.imagen = imagen
             tipos.save()
 
             return redirect('tipos_equipos')
